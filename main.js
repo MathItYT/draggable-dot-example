@@ -106,6 +106,18 @@ async function run() {
     document.addEventListener('mouseup', () => {
         document.removeEventListener('mousemove', onDrag);
     });
+    // Mobile
+    const onDragMobile = (e) => {
+        // Don't move the page
+        e.preventDefault();
+        return onDrag(e.touches[0]);
+    };
+    draggableDot.addEventListener('touchstart', (e) => {
+        document.addEventListener('touchmove', onDragMobile);
+    });
+    document.addEventListener('touchend', () => {
+        document.removeEventListener('touchmove', onDragMobile);
+    });
 }
 
 init().then(run);
